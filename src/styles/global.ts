@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-unresolved */
 import { createGlobalStyle } from 'styled-components';
 
 import githubBackground from '../assets/github-background.svg';

@@ -24,14 +24,15 @@
         "prettier"
     ],
     "rules": {
+      "prettier/prettier": "error",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "react/jsx-filename-extension": [
-        1,
+      "react/jsx-filename-extension": [1,{"extensions": [".tsx"]}],
+      "import/preferer-deafult-export": "off",
+      "@typescript-eslint/explicit-function-return-type": [
+        "error",
         {
-        "extensions": [
-          ".tsx"
-        ]
+          "allowExpressions": true
         }
       ],
       "import/extensions": [
@@ -46,8 +47,7 @@
       "@typescript-eslint/no-use-before-define": [
         "error"
       ],
-      "react/react-in-jsx-scope": "off",
-      "prettier/prettier": "error"
+      "react/react-in-jsx-scope": "off"
     },
     "settings": {
       "import/resolver": {
