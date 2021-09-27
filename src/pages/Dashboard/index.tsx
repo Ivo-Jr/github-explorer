@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 
 import { FiChevronRight } from 'react-icons/fi';
 import api from '../../services/api';
@@ -19,8 +19,25 @@ interface Repository {
 const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
   const [inputError, setInputError] = useState('');
-  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [repositories, setRepositories] = useState<Repository[]>(() => {
+    const storagedRepositories = localStorage.getItem(
+      '@GithubExplorer:repositories',
+    );
 
+    if (storagedRepositories) {
+      return JSON.parse(storagedRepositories);
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@GithubExplorer:repositories',
+      JSON.stringify(repositories),
+    );
+  }, [repositories]);
+
+  // Foi colocado "Promise<void>" pq é uma função async.
   async function handleAddRepository(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
