@@ -35,6 +35,8 @@ interface Issue {
   html_url: string;
 }
 
+// interface TesteIssue {}
+
 const Repository: React.FC = () => {
   const [repository, setRepository] = useState<Repository | null>(null);
   const [issues, setIssues] = useState<Issue[]>([]);
@@ -42,25 +44,25 @@ const Repository: React.FC = () => {
   const { params } = useRouteMatch<RepositoryParams>();
 
   useEffect(() => {
-    api.get(`repos/${params.repository}`).then(response => {
-      setRepository(response.data);
-    });
+    // api.get(`repos/${params.repository}`).then(response => {
+    //   setRepository(response.data);
+    // });
 
-    api.get(`repos/${params.repository}/issues`).then(response => {
-      setIssues(response.data);
-    });
+    // api.get(`repos/${params.repository}/issues`).then(response => {
+    //   setIssues(response.data);
+    // });
 
-    // async function loadData(): Promise<void> {
-    //   const [repository, issue] = await Promise.all([
-    //     api.get(`repos/${params.repository}`),
-    //     api.get(`repos/${params.repository}/issues`),
-    //   ]);
+    async function loadData(): Promise<void> {
+      const [testeRepo, issue] = await Promise.all([
+        api.get(`repos/${params.repository}`),
+        api.get(`repos/${params.repository}/issues`),
+      ]);
 
-    //   console.log(repository);
-    //   console.log(issue);
-    // }
+      setRepository(testeRepo.data);
+      setIssues(issue.data);
+    }
 
-    // loadData();
+    loadData();
   }, [params.repository]);
 
   return (
